@@ -1,9 +1,34 @@
 {
-    "activeFile": "",
+    "activeFile": "C:/Users/Santos/Downloads/map.json",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Santos/Downloads/map.json": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 832,
+                "y": 542
+            }
+        },
+        "C:/Users/Santos/Downloads/map.json#spritesheet-tiles-default": {
+            "scaleInDock": 0.5
+        },
+        "mapa.tmj": {
+            "scale": 0.33,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1290.9090909090908,
+                "y": 348.4848484848485
+            }
+        },
+        "mapa.tmj#spritesheet-tiles-default": {
+            "scaleInDock": 0.5
+        }
     },
     "last.imagePath": "C:/Users/Santos/Downloads/kenney_new-platformer-pack-1.1/Spritesheets",
     "map.height": 10,
@@ -12,9 +37,12 @@
     "map.tileWidth": 64,
     "map.width": 20,
     "openFiles": [
+        "C:/Users/Santos/Downloads/map.json"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
+        "C:/Users/Santos/Downloads/map.json",
+        "mapa.tmj"
     ],
     "tileset.embedInMap": true,
     "tileset.tileSize": {
