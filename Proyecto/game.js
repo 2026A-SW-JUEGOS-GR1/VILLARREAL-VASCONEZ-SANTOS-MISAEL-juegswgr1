@@ -147,6 +147,8 @@ class PlayGame extends Phaser.Scene {
         this.scoreB = 0
         this.scoreStar = 0
         this.scoreHoop = 0
+        this.currentSpeed = gameOptions.playerSpeed
+        this.level = 1
 
         this.groundGroup = this.physics.add.group({
             immovable: true,
@@ -201,6 +203,10 @@ class PlayGame extends Phaser.Scene {
         imgH.setScale(0.14)
         this.scoreHoopText = this.add.text(330, 23, "0", { fontSize: "30px", fill: "#ffffff" })
 
+        this.levelText = this.add.text(game.config.width - 20, 23, "NVL 1", {
+            fontSize: "28px", fill: "#ffdd57", fontStyle: "bold"
+        }).setOrigin(1, 0)
+
         this.eventText = this.add.text(game.config.width / 2, game.config.height - 60, "", { fontSize: "30px", fill: "#ffffff", backgroundColor: "#000000", align: "center"})
         this.eventText.setOrigin(0.5, 1)
         this.eventText.setWordWrapWidth(500)
@@ -230,6 +236,13 @@ class PlayGame extends Phaser.Scene {
             loop: true
         })
 
+        this.time.addEvent({
+            callback: this.increaseDifficulty,
+            callbackScope: this,
+            delay: 10000,
+            loop: true
+        })
+
         this.input.keyboard.on('keydown-LEFT', () => {
             this.player.anims.play('left', true);
         });
@@ -239,47 +252,55 @@ class PlayGame extends Phaser.Scene {
         });
     }
 
+    increaseDifficulty() {
+        if (this.gameOver) return
+        this.currentSpeed = Math.min(this.currentSpeed + 60, 1200)
+        this.level++
+        this.levelText.setText(`NVL ${this.level}`)
+        this.eventText.setText(`¡Nivel ${this.level}!`)
+    }
+
     addGround() {
         //add more ground
         let tile = this.groundGroup.create(Phaser.Math.Between(0, game.config.width), 0, "pink-tile")
-        tile.setVelocityY(gameOptions.playerSpeed / 6)
+        tile.setVelocityY(this.currentSpeed / 6)
         tile.setScale(0.5)
 
         //add flying basketballs
         if (Phaser.Math.Between(0, 1)) {
             let basketball = this.basketballsGroup.create(Phaser.Math.Between(0, game.config.width), 0, "basketball")
-            basketball.setVelocityY(gameOptions.playerSpeed)
+            basketball.setVelocityY(this.currentSpeed)
             basketball.setScale(0.3)
         }
 
         //add hoop collectibles
         if (Phaser.Math.Between(0, 0.5)) {
             let hoop = this.hoopGroup.create(Phaser.Math.Between(0, game.config.width), 0, "hoop")
-            hoop.setVelocityY(gameOptions.playerSpeed)
+            hoop.setVelocityY(this.currentSpeed)
             hoop.setScale(0.2)
         }
 
         //add flying stars
         if (Phaser.Math.Between(0, 0.7)) {
             let star = this.starGroup.create(Phaser.Math.Between(0, game.config.width), 0, "star")
-            star.setVelocityY(gameOptions.playerSpeed)
+            star.setVelocityY(this.currentSpeed)
             star.setScale(0.1)
-            star.setVelocityX(gameOptions.opponentSpeed / 6)
+            star.setVelocityX(this.currentSpeed / 6)
         }
 
         //add flying big opponents
         if (Phaser.Math.Between(0, 1)) {
             let opponentBig = this.jordan.create(Phaser.Math.Between(0, game.config.width), 0, "opponent")
-            opponentBig.setVelocityX(gameOptions.opponentSpeed)
-            opponentBig.setVelocityY(gameOptions.opponentSpeed * 1.5)
+            opponentBig.setVelocityX(this.currentSpeed)
+            opponentBig.setVelocityY(this.currentSpeed * 1.5)
             opponentBig.setScale(0.4)
         }
 
         //add flying small opponents
         if (Phaser.Math.Between(0, 0.8)) {
             let opponentSmall = this.smallJordan.create(Phaser.Math.Between(0, game.config.width), 0, "opponent")
-            opponentSmall.setVelocityX(gameOptions.opponentSpeed * -1)
-            opponentSmall.setVelocityY(gameOptions.opponentSpeed * 1.5)
+            opponentSmall.setVelocityX(this.currentSpeed * -1)
+            opponentSmall.setVelocityY(this.currentSpeed * 1.5)
             opponentSmall.setScale(0.1)
         }
     }
