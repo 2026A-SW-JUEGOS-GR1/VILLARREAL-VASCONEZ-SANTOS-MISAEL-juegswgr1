@@ -1,14 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crazy Basketball Game</title>
-    <script src="game.js" defer></script>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Killing Time</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #0c0c12;
+        overflow: hidden;
+      }
 
-</head>
-<body>
-    
-</body>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Courier New", Courier, monospace;
+        color: #e8e8f0;
+      }
+
+      /* Phaser inyecta el <canvas> aquí. */
+      #game canvas {
+        display: block;
+        image-rendering: pixelated;
+      }
+
+      #boot-message {
+        max-width: 620px;
+        padding: 28px 32px;
+        border: 2px solid #3a3a55;
+        background: #1b1b28;
+        line-height: 1.65;
+        font-size: 14px;
+      }
+
+      #boot-message h1 {
+        margin: 0 0 14px;
+        font-size: 20px;
+        color: #ffc857;
+      }
+
+      #boot-message code {
+        padding: 2px 6px;
+        border-radius: 3px;
+        background: #0c0c12;
+        color: #46d160;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="game"></div>
+
+    <!--
+      Este bloque se ve solo si el juego NO arranca. main.js lo elimina en cuanto
+      Phaser se instancia correctamente.
+    -->
+    <div id="boot-message">
+      <h1>Cargando Killing Time…</h1>
+      <p>Si este mensaje no desaparece, revisa la consola del navegador.</p>
+    </div>
+
+    <script>
+      // El proyecto usa módulos ES, que el navegador bloquea por CORS cuando la
+      // página se abre con doble clic (protocolo file://). Detectarlo aquí evita
+      // una pantalla en blanco sin explicación.
+      if (window.location.protocol === "file:") {
+        document.getElementById("boot-message").innerHTML =
+          "<h1>Hace falta un servidor local</h1>" +
+          "<p>Killing Time usa <strong>módulos ES</strong>, y los navegadores no " +
+          "permiten cargarlos desde <code>file://</code>.</p>" +
+          "<p>Sírvelo por HTTP con cualquiera de estas opciones, desde la carpeta " +
+          "del proyecto:</p>" +
+          "<p><code>npx serve</code> &nbsp;·&nbsp; <code>python -m http.server</code>" +
+          " &nbsp;·&nbsp; extensión <strong>Live Server</strong> de VS Code</p>" +
+          "<p>Después abre la dirección <code>http://localhost:…</code> que te indique.</p>";
+      }
+    </script>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
 </html>
