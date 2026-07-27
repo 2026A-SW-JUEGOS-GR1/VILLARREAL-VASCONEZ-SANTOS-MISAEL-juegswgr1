@@ -1,0 +1,43 @@
+# ── Dependencias ──────────────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+.yarn/
+
+# ── Salidas de build ──────────────────────────────────────────────────
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+
+# ── Cache de herramientas ─────────────────────────────────────────────
+.turbo/
+.cache/
+.eslintcache
+.textures-cache.json
+.export-cache.json
+
+# ── Variables de entorno (secretos) ───────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── Logs ──────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Archivos del sistema operativo ────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Estado personal de editores ───────────────────────────────────────
+*.tiled-session
+.idea/
+*.swp
+
+# ── Despliegue ────────────────────────────────────────────────────────
+.vercel/
